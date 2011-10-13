@@ -12,7 +12,7 @@ use warnings;
 
 package App::rbinperl;
 {
-  $App::rbinperl::VERSION = '0.400';
+  $App::rbinperl::VERSION = '0.600';
 }
 BEGIN {
   $App::rbinperl::AUTHORITY = 'cpan:RWSTAUNER';
@@ -25,7 +25,8 @@ BEGIN {
 __END__
 =pod
 
-=for :stopwords Randy Stauner ACKNOWLEDGEMENTS apache CGI FCGI linux login
+=for :stopwords Randy Stauner ACKNOWLEDGEMENTS rlibperl rbinperl apache CGI FCGI linux
+login
 
 =encoding utf-8
 
@@ -35,7 +36,7 @@ App::rbinperl - Execute perl using relative lib and assuming -S
 
 =head1 VERSION
 
-version 0.400
+version 0.600
 
 =head1 SYNOPSIS
 
@@ -73,8 +74,9 @@ The C<rbinperl> script simplifies the execution of
 a perl script that depends on modules located in 
 relative library directories.
 
-This uses L<App::rlibperl> to prepend relative lib directories
-to C<@INC> and additionally passes the C<-S> argument to perl.
+This uses the same logic as L<App::rlibperl>
+to prepend relative lib directories to C<@INC> and
+additionally passes the C<-S> argument to perl.
 This causes perl to search the C<$PATH>
 (which now contains the directory where C<rbinperl> was found)
 for the specified script.

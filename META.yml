@@ -3,14 +3,11 @@ abstract: 'Execute perl prepending relative lib to @INC'
 author:
   - 'Randy Stauner <rwstauner@cpan.org>'
 build_requires:
-  Config: 0
   Exporter: 0
   File::Copy: 0
   File::Find: 0
   File::Path: 0
-  File::Spec::Functions: 0
   File::Temp: 0
-  FindBin: 0
   Test::More: 0.88
 configure_requires:
   ExtUtils::MakeMaker: 6.30
@@ -37,11 +34,14 @@ no_index:
 provides:
   App::rbinperl:
     file: lib/App/rbinperl.pm
-    version: 0.400
+    version: 0.600
   App::rlibperl:
     file: lib/App/rlibperl.pm
-    version: 0.400
+    version: 0.600
 requires:
+  Config: 0
+  File::Spec::Functions: 0
+  FindBin: 0
   perl: 5.006
   strict: 0
   warnings: 0
@@ -49,7 +49,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=App-rlibperl
   homepage: https://github.com/rwstauner/App-rlibperl
   repository: https://github.com/rwstauner/App-rlibperl.git
-version: 0.400
+version: 0.600
 x_Dist_Zilla:
   plugins:
     -
@@ -119,7 +119,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::GithubMeta
       name: '@Author::RWSTAUNER/GithubMeta'
-      version: 0.20
+      version: 0.22
     -
       class: Dist::Zilla::Plugin::AutoPrereqs
       name: '@Author::RWSTAUNER/AutoPrereqs'
@@ -167,7 +167,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Test::PodSpelling
       name: '@Author::RWSTAUNER/Test::PodSpelling'
-      version: v2.0.0
+      version: 2.1.0
     -
       class: Dist::Zilla::Plugin::Test::UnusedVars
       name: '@Author::RWSTAUNER/@TestingMania/Test::UnusedVars'
@@ -207,7 +207,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Test::Compile
       name: '@Author::RWSTAUNER/@TestingMania/Test::Compile'
-      version: 1.112400
+      version: 1.112820
     -
       class: Dist::Zilla::Plugin::Test::Kwalitee
       name: '@Author::RWSTAUNER/@TestingMania/Test::Kwalitee'
@@ -280,6 +280,10 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::InstallRelease
       name: '@Author::RWSTAUNER/InstallRelease'
       version: 0.007
+    -
+      class: Dist::Zilla::Plugin::Run::BeforeBuild
+      name: Run::BeforeBuild
+      version: 0.010
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'

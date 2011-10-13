@@ -8,12 +8,14 @@ Makefile.PL
 README
 bin/rbinperl
 bin/rlibperl
+corpus/generate_scripts.pl
 dist.ini
 lib/App/rbinperl.pm
 lib/App/rlibperl.pm
 t/00-compile.t
 t/000-report-versions-tiny.t
 t/lib/App/rlibperl/Tester.pm
+t/pipe.t
 t/rbinperl.t
 t/rlibperl.t
 t/shebang.t

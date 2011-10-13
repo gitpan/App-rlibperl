@@ -1,5 +1,14 @@
 Revision history for App-rlibperl
 
+0.600     2011-10-13T16:55:37Z
+
+  - Generate scripts to enable rbinperl to stand-alone
+  - Change script shebangs from "bin/sh\neval exec" to "env perl"
+  - Implement fixes for Windows
+  - Document bugs and compare to App::local::lib::helper in Pod
+  - Fix tests to look for perl in $PATH before using $^X
+  - Test STDIN pipe
+
 0.400     2011-10-03T15:05:57Z
 
   - Initial release

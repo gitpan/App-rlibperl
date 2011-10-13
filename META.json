@@ -38,6 +38,9 @@
       },
       "runtime" : {
          "requires" : {
+            "Config" : 0,
+            "File::Spec::Functions" : 0,
+            "FindBin" : 0,
             "perl" : "5.006",
             "strict" : 0,
             "warnings" : 0
@@ -45,14 +48,11 @@
       },
       "test" : {
          "requires" : {
-            "Config" : 0,
             "Exporter" : 0,
             "File::Copy" : 0,
             "File::Find" : 0,
             "File::Path" : 0,
-            "File::Spec::Functions" : 0,
             "File::Temp" : 0,
-            "FindBin" : 0,
             "Test::More" : "0.88"
          }
       }
@@ -60,11 +60,11 @@
    "provides" : {
       "App::rbinperl" : {
          "file" : "lib/App/rbinperl.pm",
-         "version" : "0.400"
+         "version" : "0.600"
       },
       "App::rlibperl" : {
          "file" : "lib/App/rlibperl.pm",
-         "version" : "0.400"
+         "version" : "0.600"
       }
    },
    "release_status" : "stable",
@@ -80,7 +80,7 @@
          "web" : "https://github.com/rwstauner/App-rlibperl"
       }
    },
-   "version" : "0.400",
+   "version" : "0.600",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
@@ -166,7 +166,7 @@
          {
             "class" : "Dist::Zilla::Plugin::GithubMeta",
             "name" : "@Author::RWSTAUNER/GithubMeta",
-            "version" : "0.20"
+            "version" : "0.22"
          },
          {
             "class" : "Dist::Zilla::Plugin::AutoPrereqs",
@@ -226,7 +226,7 @@
          {
             "class" : "Dist::Zilla::Plugin::Test::PodSpelling",
             "name" : "@Author::RWSTAUNER/Test::PodSpelling",
-            "version" : "v2.0.0"
+            "version" : "2.1.0"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::UnusedVars",
@@ -276,7 +276,7 @@
          {
             "class" : "Dist::Zilla::Plugin::Test::Compile",
             "name" : "@Author::RWSTAUNER/@TestingMania/Test::Compile",
-            "version" : "1.112400"
+            "version" : "1.112820"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::Kwalitee",
@@ -367,6 +367,11 @@
             "class" : "Dist::Zilla::Plugin::InstallRelease",
             "name" : "@Author::RWSTAUNER/InstallRelease",
             "version" : "0.007"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Run::BeforeBuild",
+            "name" : "Run::BeforeBuild",
+            "version" : "0.010"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",

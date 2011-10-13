@@ -12,7 +12,7 @@ use warnings;
 
 package App::rlibperl;
 {
-  $App::rlibperl::VERSION = '0.400';
+  $App::rlibperl::VERSION = '0.600';
 }
 BEGIN {
   $App::rlibperl::AUTHORITY = 'cpan:RWSTAUNER';
@@ -25,8 +25,9 @@ BEGIN {
 __END__
 =pod
 
-=for :stopwords Randy Stauner ACKNOWLEDGEMENTS executables cpan testmatrix url annocpan
-anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders
+=for :stopwords Randy Stauner ACKNOWLEDGEMENTS rlibperl rbinperl executables cpan
+testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto
+metadata placeholders
 
 =encoding utf-8
 
@@ -36,7 +37,7 @@ App::rlibperl - Execute perl prepending relative lib to @INC
 
 =head1 VERSION
 
-version 0.400
+version 0.600
 
 =head1 SYNOPSIS
 
@@ -127,6 +128,45 @@ Lastly it will check for simply C<../lib>.
 If you have another directory structure you think should be supported
 please send suggestions!
 
+=head1 BUGS AND LIMITATIONS
+
+The initial use-case for C<rlibperl> was
+installing via L<local::lib>
+(or without it using something like C<cpanm --local-lib /other/dir>)
+and calling like so:
+
+  $ /path/to/local-lib/rlibperl -perl-args
+
+(It may also be useful in a per-project setting,
+though it's likely easier to make custom scripts
+and/or use the unrelated L<rlib>.)
+
+The following limitations exist when used in other situations,
+however they are considered bugs and may be "fixed" at some point
+(so their functionality should not be relied upon):
+
+=over 4
+
+=item *
+
+Installing this into a perl's default lib will end up duplicating
+directories in C<@INC> and probably reverse the order of your search path.
+
+This is a problem, but then installing C<rlibperl> into a directory
+that is already in your C<@INC> isn't all that useful.
+
+=item *
+
+The scripts use the shebang C<#!/usr/bin/env perl>
+which is not entirely portable,
+but seemed less problematic and more predictable
+than the C<#!/bin/sh> + C<eval 'exec'> trick.
+
+=back
+
+If you think other functionality would be useful
+please submit examples, rationale, or B<patches>.
+
 =head1 SEE ALSO
 
 =over 4
@@ -137,7 +177,7 @@ L<App::rbinperl> - included
 
 =item *
 
-L<local::lib> - The module that makes this one useful.
+L<local::lib> - The module that makes this one useful
 
 =item *
 
@@ -151,6 +191,18 @@ L<Devel::Local> - An alternative to the above modules
 
 L<rlib> - This module is not related to or dependent on L<rlib>
 but it serves a similar purpose in a different situation.
+
+=item *
+
+L<App::local::lib::helper> - A more configurable alternative to this dist
+that loads L<local::lib> and its environment variables.
+
+The C<localenv> script installed by L<App::local::lib::helper>
+may be more powerful as a shell tool,
+but C<rlibperl> serves a few niches that C<localenv> does not,
+including enabling shebang args and taint mode.
+
+Use the tool that works for you.
 
 =back
 

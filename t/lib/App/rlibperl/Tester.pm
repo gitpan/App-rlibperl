@@ -15,6 +15,8 @@ use Exporter;      # core
 our @ISA    = qw( Exporter );
 our @EXPORT = qw(
   %Config
+  $PERL
+  $ARCHNAME
   @scripts
   @structures
   catdir
@@ -37,8 +39,15 @@ our @structures = qw(
   parent
 );
 
+# find 'perl' in $PATH; if not found use $^X.
+our ($PERL, $ARCHNAME) = system(qw(perl -e 1)) == 0
+  ? ('perl', scalar qx/perl -MConfig -e "print \$::Config{archname}"/)
+  : ($^X, $Config{archname});
+
+chomp($ARCHNAME); # just in case
+
 sub get_inc {
-  my $perl = shift || $^X;
+  my $perl = shift || $PERL;
   local $ENV{PERL5LIB};
   return split(/\t/, qx/$perl -e "\$, = qq[\\t]; print \@INC;"/);
 }
@@ -50,7 +59,7 @@ sub named_tree {
   my %subdirs;
   if ( $name eq 'local::lib' ) {
     $subdirs{bin}  = [qw(bin)];
-    $subdirs{arch} = [qw(lib perl5), $Config{archname}];
+    $subdirs{arch} = [qw(lib perl5), $ARCHNAME];
     $subdirs{lib}  = [qw(lib perl5)];
   }
   elsif ( $name eq 'parent' ) {
@@ -72,13 +81,16 @@ sub named_tree {
   mkpath([values %subdirs]);
 
   my $source = ['bin'];
-  # is there a reason to get them out of blib/script ?
+  $source = [qw(blib script)] if -d 'blib';
 
-  # TODO: $ext = '.pl' if $^O eq 'MSWin32' ?
-  my %scripts = map { ($_ => catfile($subdirs{bin}, $_)) }
+  my $ext =
+    $^O eq 'MSWin32' ? '.bat' :
+    '';
+
+  my %scripts = map { ($_ => catfile($subdirs{bin}, $_.$ext)) }
     @scripts;
 
-  copy( catfile(@$source, $_), $scripts{$_} )
+  copy( catfile(@$source, $_.$ext), $scripts{$_} )
     for keys %scripts;
 
   chmod 0755, values %scripts;
@@ -107,3 +119,5 @@ sub make_script {
   chmod 0755, $file;
   return $file;
 }
+
+1;

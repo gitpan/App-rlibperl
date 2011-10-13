@@ -12,14 +12,11 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "Execute perl prepending relative lib to \@INC",
   "AUTHOR" => "Randy Stauner <rwstauner\@cpan.org>",
   "BUILD_REQUIRES" => {
-    "Config" => 0,
     "Exporter" => 0,
     "File::Copy" => 0,
     "File::Find" => 0,
     "File::Path" => 0,
-    "File::Spec::Functions" => 0,
     "File::Temp" => 0,
-    "FindBin" => 0,
     "Test::More" => "0.88"
   },
   "CONFIGURE_REQUIRES" => {
@@ -33,10 +30,13 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "App::rlibperl",
   "PREREQ_PM" => {
+    "Config" => 0,
+    "File::Spec::Functions" => 0,
+    "FindBin" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.400",
+  "VERSION" => "0.600",
   "test" => {
     "TESTS" => "t/*.t"
   }
