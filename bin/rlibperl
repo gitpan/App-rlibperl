@@ -99,7 +99,7 @@ rlibperl - Execute perl prepending relative lib to @INC
 
 =head1 VERSION
 
-version 0.600
+version 0.601
 
 =head1 SEE ALSO
 

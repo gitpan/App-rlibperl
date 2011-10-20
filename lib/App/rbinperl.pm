@@ -12,7 +12,7 @@ use warnings;
 
 package App::rbinperl;
 {
-  $App::rbinperl::VERSION = '0.600';
+  $App::rbinperl::VERSION = '0.601';
 }
 BEGIN {
   $App::rbinperl::AUTHORITY = 'cpan:RWSTAUNER';
@@ -36,7 +36,7 @@ App::rbinperl - Execute perl using relative lib and assuming -S
 
 =head1 VERSION
 
-version 0.600
+version 0.601
 
 =head1 SYNOPSIS
 

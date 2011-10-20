@@ -1,7 +1,7 @@
 
 
 This archive contains the distribution App-rlibperl,
-version 0.600:
+version 0.601:
 
   Execute perl prepending relative lib to @INC
 

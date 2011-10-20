@@ -3,6 +3,7 @@ abstract: 'Execute perl prepending relative lib to @INC'
 author:
   - 'Randy Stauner <rwstauner@cpan.org>'
 build_requires:
+  Cwd: 0
   Exporter: 0
   File::Copy: 0
   File::Find: 0
@@ -34,10 +35,10 @@ no_index:
 provides:
   App::rbinperl:
     file: lib/App/rbinperl.pm
-    version: 0.600
+    version: 0.601
   App::rlibperl:
     file: lib/App/rlibperl.pm
-    version: 0.600
+    version: 0.601
 requires:
   Config: 0
   File::Spec::Functions: 0
@@ -49,7 +50,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=App-rlibperl
   homepage: https://github.com/rwstauner/App-rlibperl
   repository: https://github.com/rwstauner/App-rlibperl.git
-version: 0.600
+version: 0.601
 x_Dist_Zilla:
   plugins:
     -

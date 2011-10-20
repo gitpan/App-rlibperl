@@ -12,6 +12,7 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "Execute perl prepending relative lib to \@INC",
   "AUTHOR" => "Randy Stauner <rwstauner\@cpan.org>",
   "BUILD_REQUIRES" => {
+    "Cwd" => 0,
     "Exporter" => 0,
     "File::Copy" => 0,
     "File::Find" => 0,
@@ -36,7 +37,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.600",
+  "VERSION" => "0.601",
   "test" => {
     "TESTS" => "t/*.t"
   }
