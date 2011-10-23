@@ -1,5 +1,4 @@
-#!/usr/bin/env perl
-# vim: set ts=2 sts=2 sw=2 expandtab smarttab filetype=perl:
+#!/usr/local/bin/perl
 #
 # This file is part of App-rlibperl
 #
@@ -99,7 +98,7 @@ rlibperl - Execute perl prepending relative lib to @INC
 
 =head1 VERSION
 
-version 0.601
+version 0.700
 
 =head1 SEE ALSO
 

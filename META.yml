@@ -35,10 +35,10 @@ no_index:
 provides:
   App::rbinperl:
     file: lib/App/rbinperl.pm
-    version: 0.601
+    version: 0.700
   App::rlibperl:
     file: lib/App/rlibperl.pm
-    version: 0.601
+    version: 0.700
 requires:
   Config: 0
   File::Spec::Functions: 0
@@ -50,7 +50,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=App-rlibperl
   homepage: https://github.com/rwstauner/App-rlibperl
   repository: https://github.com/rwstauner/App-rlibperl.git
-version: 0.601
+version: 0.700
 x_Dist_Zilla:
   plugins:
     -
@@ -212,7 +212,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Test::Kwalitee
       name: '@Author::RWSTAUNER/@TestingMania/Test::Kwalitee'
-      version: 2.020000
+      version: 2.03
     -
       class: Dist::Zilla::Plugin::NoTabsTests
       name: '@Author::RWSTAUNER/@TestingMania/NoTabsTests'

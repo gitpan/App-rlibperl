@@ -5,15 +5,35 @@ use lib 't/lib';
 use App::rlibperl::Tester;
 use Test::More;
 
+# don't even bother with these:
 plan skip_all => "Testing shebangs not supported on $^O"
-  # this list could be much longer and more complicated
-  if $^O !~ /
-      linux
-    | bsd
-    | darwin
-    | cygwin
-    | solaris
+  if $^O =~ /
+      MSWin32
   /x;
+
+my $exec_if_shell =
+  # avoid -S for portability; we're using full paths, anyway
+  sprintf(q<eval 'exec %s $0 ${1+"$@"}'%s>, $PERL, "\n  if 0;");
+
+# try a quick interpreter shebang to see if it appears to be supported
+{
+  my $dir = tempdir( CLEANUP => 1 );
+  my $parent = make_script([$dir, 'parent.pl'], <<SCRIPT);
+#!$PERL
+$exec_if_shell
+print "parent";
+do \$ARGV[0] if \@ARGV;
+SCRIPT
+
+  my $child  = make_script([$dir, 'child.pl' ], <<SCRIPT);
+#!$parent
+$exec_if_shell
+print "child";
+SCRIPT
+
+  plan skip_all => "Nested shebangs not supported on $^O"
+    unless qx/$child/ eq "parentchild";
+}
 
 plan tests => scalar @structures;
 
@@ -31,9 +51,10 @@ sub parse {
 1;
 MOD
 
-  my $interp = 'sillyinterp';
+  my $interp = 'sillyinterp.pl';
   make_script([$tree->{bin}, $interp], <<SCRIPT);
 #!$PERL
+$exec_if_shell
 use strict;
 use warnings;
 use Silly_Interp;
@@ -43,9 +64,12 @@ while(<>){
 SCRIPT
 
   # put script somewhere separate
-  my $scriptdir = tempdir( UNLINK => 1 );
-  my $script = make_script([$scriptdir, 'silly'], <<SCRIPT);
-#!$tree->{rbinperl} sillyinterp
+  my $scriptdir = tempdir( CLEANUP => 1 );
+  my $script = make_script([$scriptdir, 'silly.pl'], <<SCRIPT);
+#!$tree->{rbinperl} $interp
+# OSes that use this exec will require repeating the shebang files:
+eval 'exec $PERL $tree->{rbinperl} $interp \$0 \${1+"\$@"}'
+  if 0;
 foo()
 narf.
 SCRIPT

@@ -61,11 +61,11 @@
    "provides" : {
       "App::rbinperl" : {
          "file" : "lib/App/rbinperl.pm",
-         "version" : "0.601"
+         "version" : "0.700"
       },
       "App::rlibperl" : {
          "file" : "lib/App/rlibperl.pm",
-         "version" : "0.601"
+         "version" : "0.700"
       }
    },
    "release_status" : "stable",
@@ -81,7 +81,7 @@
          "web" : "https://github.com/rwstauner/App-rlibperl"
       }
    },
-   "version" : "0.601",
+   "version" : "0.700",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
@@ -282,7 +282,7 @@
          {
             "class" : "Dist::Zilla::Plugin::Test::Kwalitee",
             "name" : "@Author::RWSTAUNER/@TestingMania/Test::Kwalitee",
-            "version" : "2.020000"
+            "version" : "2.03"
          },
          {
             "class" : "Dist::Zilla::Plugin::NoTabsTests",

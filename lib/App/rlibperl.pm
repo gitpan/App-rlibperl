@@ -12,7 +12,7 @@ use warnings;
 
 package App::rlibperl;
 {
-  $App::rlibperl::VERSION = '0.601';
+  $App::rlibperl::VERSION = '0.700';
 }
 BEGIN {
   $App::rlibperl::AUTHORITY = 'cpan:RWSTAUNER';
@@ -37,7 +37,7 @@ App::rlibperl - Execute perl prepending relative lib to @INC
 
 =head1 VERSION
 
-version 0.601
+version 0.700
 
 =head1 SYNOPSIS
 
@@ -59,10 +59,6 @@ Then you don't need to add an explicit
   use lib '/home/username/perl5/lib/perl5';
 
 before any of your other code.
-
-It also uses the environment to find perl
-similar to the common C<#!/usr/bin/env perl> trick
-(using the common C<eval 'exec...'\n if 0> trick).
 
 =head1 DESCRIPTION
 
@@ -157,10 +153,20 @@ that is already in your C<@INC> isn't all that useful.
 
 =item *
 
-The scripts use the shebang C<#!/usr/bin/env perl>
-which is not entirely portable,
-but seemed less problematic and more predictable
-than the C<#!/bin/sh> + C<eval 'exec'> trick.
+Using these scripts in the shebang is arguably the most useful
+way to use them (and in fact the reason they were created).
+
+Unfortunately shebangs aren't always portable.
+
+Some systems don't allow using another script
+(as opposed to a binary) in the shebang line.
+You can work around this
+by adding a slight variation of the common C<eval 'exec'> idiom.
+Just insert what would have been your shebang into the exec arguments:
+
+  #!/bin/sh
+  eval 'exec perl /home/username/perl5/bin/rlibperl -S $0 ${1+"$@"}'
+    if 0;
 
 =back
 
